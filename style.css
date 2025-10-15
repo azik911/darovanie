@@ -1,0 +1,249 @@
+/* ===== Brand */
+:root{
+  --c-primary:#19416E;
+  --c-primary-hover:#215998;
+  --c-border:#B4B4B4;
+  --c-input-text:#888888;
+  --c-bg:#ffffff;
+}
+
+/* ===== Фон на весь экран */
+body{
+  margin:0;
+  font-family:"Open Sans", Arial, sans-serif;
+  color:#2c2c2c;
+  background:url("assets/images/fon.jpg") center/cover no-repeat fixed;
+}
+
+/* лёгкая вуаль, чтобы карточка читалась */
+.lk-wrap{
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  position:relative;
+}
+.lk-wrap::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:none
+}
+
+/* ===== Карточка формы */
+.lk-auth{
+  width:424px;
+  padding:35px 62px 60px;
+  background:var(--c-bg);
+  border-radius:5px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
+  box-sizing:border-box;
+  z-index:1;
+}
+
+/* логотип сверху */
+.lk-logo{
+  width:100px;
+  height:100px;
+  margin:0 auto 16px;
+  display:block;
+}
+
+/* Заголовок */
+.lk-auth__title{
+  margin:0 0 30px;
+  font-size:18px;
+  line-height:1.2;
+  font-weight:700;
+  text-align:center;
+  font-family:"Merriweather", serif;
+  color:var(--c-primary);
+}
+
+/* ===== Поля */
+.lk-form{ display:flex; flex-direction:column; }
+.lk-form__group{ margin-bottom:10px; position:relative; }
+
+.sr-only{
+  position:absolute!important; width:1px; height:1px; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+
+.lk-form__group input{
+  width:100%; height:46px; box-sizing:border-box;
+  padding:0 12px;
+  border:1px solid var(--c-border);
+  border-radius:5px;
+  background:#fff;
+  color:#000;
+  font-family: "Open Sans", sans-serif;
+  font-size:14px;
+  line-height:46px;
+}
+.lk-form__group input::placeholder{ color:var(--c-input-text); opacity:1; }
+.lk-form__group input:focus{
+  outline:none;
+  border-color:var(--c-primary);
+  box-shadow:0 0 0 3px rgba(25,65,110,.18);
+}
+
+/* Пароль с иконкой */
+.lk-password {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 46px; /* фиксируем высоту */
+}
+
+.lk-eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 0;
+  background: transparent url("assets/icons/eye.svg") center/18px no-repeat;
+  cursor: pointer;
+}
+
+.lk-eye.is-active {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 0;
+  background: transparent url("assets/icons/eye_open.svg") center/18px no-repeat;
+  cursor: pointer;
+
+}
+
+/* Сообщение об ошибке */
+.lk-form__error {
+  margin-top: 6px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #CC9139;
+  border: 1px solid #f3c2c2;
+  font-size: 12px;
+  position: relative;
+}
+
+/* Чекбокс и ссылка */
+.lk-form__row{
+  margin: 10px 0 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:13px;
+}
+.lk-form__row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px; /* можно варьировать от -1px до -2px для пиксельного выравнивания */
+}
+
+.lk-link{ color:var(--c-primary); text-decoration:none; font-size: 13px; }
+.lk-link:hover{ text-decoration:underline; }
+
+/* ===== Кнопки */
+.lk-form__actions{ display:flex; flex-direction:column; gap:10px; }
+.lk-btn{
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+
+  width:100%; height:46px; box-sizing:border-box;
+  border-radius:5px; border:2px solid transparent;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-weight:700; text-decoration:none; cursor:pointer;
+}
+.lk-btn--primary{
+  background:var(--c-primary); color:#fff;
+  box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+.lk-btn--primary:hover{ background:var(--c-primary-hover); }
+.lk-btn--ghost{
+  background:#fff; color:var(--c-primary); border-color:var(--c-primary);
+  box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+.lk-btn--ghost:hover{ background:#f5faff; }
+
+/* ===== Адаптация */
+@media (max-height:700px){
+  .lk-auth{ height:auto; padding:24px 24px; }
+  .lk-form__row{
+  margin: 10px 0 30px; margin-bottom:32px; }
+}
+@media (max-width:480px){
+  .lk-auth{
+    width:100%; max-width:424px;
+    padding:24px 20px 28px;
+  }
+  .lk-form__group input, .lk-btn{
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+ width:100%; }
+}
+.lk-back a{display:inline-block;margin:-6px 0 16px;text-decoration:none;color:#215998}
+.lk-back a:hover{opacity:.9}
+.lk-help{font-size:12px;line-height:1.4;color:#6b6b6b;margin:6px 0 12px}
+.lk-input-group{position:relative}
+
+/* Телефон + кнопка */
+.lk-phone-code {
+  display: flex;
+  width: 100%;
+}
+
+.lk-phone-code input {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 400;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--c-border);
+  border-radius: 5px 0 0 5px; /* скругление только слева */
+  background: #fff;
+  color: #000;
+  font-family: "Open Sans", sans-serif;
+}
+
+.lk-phone-code input:focus {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(25,65,110,.18);
+}
+
+.lk-phone-code .lk-btn {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 20px;
+  height: 46px;
+  width: auto;        /* фикс: убираем width:100% от .lk-btn */
+  min-width: 120px;   /* можно задать минимальную ширину */
+  flex-shrink: 0;     /* не даём кнопке сжиматься */
+  white-space: nowrap;
+  border-radius: 0 5px 5px 0; /* только справа */
+  background: var(--c-primary);
+  color: #fff;
+  border: 1px solid var(--c-border);
+  border-left: 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,.12);
+  cursor: pointer;
+}
+
+.lk-phone-code .lk-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(25,65,110,.18);
+}
+
+.page-template-page-cabinet .lk-wrap {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}

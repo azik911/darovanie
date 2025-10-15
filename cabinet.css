@@ -1,0 +1,456 @@
+/* =========================================
+   Личный кабинет — ЧИСТАЯ ФИНАЛЬНАЯ ВЕРСИЯ
+   ========================================= */
+
+   :root{
+    --c-positive: #3AB76B;
+    --c-negative: #F61A2B;
+    --c-title:    #0E3A63;
+    --shadow:     0 12px 30px rgba(22,72,127,.08);
+    --sidebar-w:  340px;          /* ширина сайдбара по макету */
+    --content-gap: 28px;
+  }
+  
+  /* Базовые вещи */
+  body{ background:#E8F4FC; font-family:"Inter",sans-serif; margin:0; padding:0; }
+  html, body{ min-height:100%; }
+  main.lk{ width:100vw; margin-left:calc(50% - 50vw); } /* на случай тём */
+  
+  
+  
+  
+  /* =========================
+     Лэйаут страницы кабинета
+     ========================= */
+  body.page-template-page-cabinet .lk-grid{
+    display:flex;
+    align-items:stretch;
+    min-height:100vh;
+  }
+  
+  /* Левый сайдбар (один слой фона) */
+  body.page-template-page-cabinet .lk-aside{
+    position:relative;            /* без fixed */
+    flex:0 0 var(--sidebar-w);
+    min-height:100vh;
+    background:#0E3A63 url("./images/fon.jpg") center/cover no-repeat;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:40px;
+    box-shadow:inset -1px 0 0 rgba(255,255,255,.18);
+    z-index:1;
+  }
+  
+  /* Контент справа */
+  body.page-template-page-cabinet .lk-content{
+    flex:1;
+    background:#fff;
+    min-height:100vh;
+    padding:40px 70px;
+    box-shadow:-6px 0 30px rgba(0,0,0,.08);
+    position:relative;
+    z-index:0;
+    margin-left:0 !important;     /* гасим старые костыли */
+  }
+  
+  /* Убираем любые «следы» старых оверлеев */
+  body.page-template-page-cabinet .lk-grid::before,
+  body.page-template-page-cabinet .lk-aside::before,
+  body.page-template-page-cabinet .lk-wrap::before{
+    content:none !important;
+    background:none !important;
+  }
+  
+  
+  
+  
+  /* ======================
+     Сайдбар: внутрянка
+     ====================== */
+  body.page-template-page-cabinet .lk-brand img{
+    width:140px; height:112px; object-fit:contain; display:block;
+  }
+  
+  body.page-template-page-cabinet .lk-aside hr{
+    width:calc(100% - 100px);
+    border:none; border-top:1.5px solid #186FA3;
+    margin:24px auto 32px; opacity:.9;
+  }
+  
+  body.page-template-page-cabinet .lk-menu{
+    display:flex; flex-direction:column; align-items:flex-start;
+    gap:16px; margin-left:40px; padding-bottom:24px;
+  }
+  
+  body.page-template-page-cabinet .lk-menu__item{
+    display:flex; align-items:center; gap:12px;
+    font-size:16px; color:#fff; text-decoration:none; font-weight:600;
+  }
+  body.page-template-page-cabinet .lk-menu__item:hover{ opacity:.85; }
+  
+  
+  
+  
+  /* ======================
+     Секции и заголовки
+     ====================== */
+  body.page-template-page-cabinet .lk-section{ margin:0 0 var(--content-gap); }
+  body.page-template-page-cabinet .lk-section__title{
+    margin:6px 0 14px; font-size:20px; font-weight:700; color:var(--c-title);
+  }
+  
+  
+  
+  
+  /* ======================
+     Карточки — общие
+     ====================== */
+  body.page-template-page-cabinet .lk-cards{
+    display:flex; flex-wrap:wrap; gap:20px;
+  }
+  body.page-template-page-cabinet .lk-card{
+    background:#fff; border-radius:16px; padding:16px 18px; box-shadow:var(--shadow);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  body.page-template-page-cabinet .lk-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(23,63,110,.12), 0 3px 8px rgba(23,63,110,.08);
+  }
+  
+  
+  
+  
+  /* ======================
+     Дети
+     ====================== */
+  body.page-template-page-cabinet .lk-section--children .lk-cards{
+    flex-wrap:nowrap; margin-left:70px; gap:20px;
+  }
+  body.page-template-page-cabinet .lk-card.lk-kid{
+    width:400px; height:90px; display:flex; align-items:center; justify-content:center;
+  }
+  body.page-template-page-cabinet .lk-kid__name{ font-weight:600; color:var(--c-title); }
+  body.page-template-page-cabinet .lk-kid__sum{ font-weight:600; color:var(--c-positive); }
+  body.page-template-page-cabinet .lk-kid__sum.is-negative{ color:var(--c-negative); }
+  
+  
+  
+  
+  /* ======================
+     Счета
+     ====================== */
+  body.page-template-page-cabinet .lk-section--accounts .lk-cards{
+    flex-wrap:nowrap; justify-content:flex-start; gap:24px; margin-left:70px;
+  }
+  body.page-template-page-cabinet .lk-card.lk-account{
+    width:320px; height:180px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px; text-align:center;
+  }
+  body.page-template-page-cabinet .lk-account__qr{
+    width:78px; height:78px; border:0; border-radius:14px; cursor:pointer;
+    background:#fff url("./assets/icons/oplata.svg") center/44px 44px no-repeat;
+    box-shadow:0 6px 18px rgba(0,0,0,.10);
+  }
+  body.page-template-page-cabinet .lk-account__qr:hover{ transform:translateY(-1px); }
+  body.page-template-page-cabinet .lk-card.lk-account a{
+    color:#1A3E6E; text-decoration:none; font-weight:600;
+  }
+  body.page-template-page-cabinet .lk-card.lk-account a:hover{ text-decoration:underline; }
+  
+  
+  
+  
+  /* ======================
+     История
+     ====================== */
+  body.page-template-page-cabinet .lk-section--history .lk-history-controls,
+  body.page-template-page-cabinet .lk-section--history .lk-history-day__title,
+  body.page-template-page-cabinet .lk-section--history .lk-history-list{
+    width: 960px; max-width: 100%;
+  }
+  body.page-template-page-cabinet .lk-history-item{
+    display:grid; grid-template-columns:1fr 170px 170px; gap:22px;
+    align-items:center; padding:18px 20px; background:#fff;
+    border-radius:12px; box-shadow:var(--shadow);
+  }
+  
+  
+  
+  
+  /* ======================
+     Модалка QR
+     ====================== */
+  body.page-template-page-cabinet .lk-modal{
+    position:fixed; inset:0; background:rgba(0,0,0,.45);
+    display:flex; align-items:center; justify-content:center; z-index:9999;
+  }
+  body.page-template-page-cabinet .lk-modal[hidden]{ display:none; }
+  body.page-template-page-cabinet .lk-modal__dialog{
+    background:#fff; border-radius:16px; padding:24px; min-width:320px; max-width:680px; position:relative;
+  }
+  body.page-template-page-cabinet .lk-modal__close{
+    position:absolute; right:12px; top:8px; background:none; border:0; font-size:24px; cursor:pointer;
+  }
+  body.page-template-page-cabinet .lk-pay{ display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; }
+  body.page-template-page-cabinet .lk-pay__qr{ width:280px; text-align:center; }
+  body.page-template-page-cabinet .lk-pay__raw{ white-space:pre-wrap; word-break:break-all; padding:8px; background:#f5f7fb; border-radius:8px; }
+  
+  
+  
+  
+  /* ======================
+     Адаптив
+     ====================== */
+  @media (max-width: 1100px){
+    body.page-template-page-cabinet .lk-section--children .lk-cards,
+    body.page-template-page-cabinet .lk-section--accounts .lk-cards{
+      margin-left:0; flex-wrap:wrap;
+    }
+    body.page-template-page-cabinet .lk-card.lk-account{
+      width:min(100%, 360px);
+    }
+  }
+  
+
+
+  /* ===== ХАРД-ФИКС: без привязки к body, перекрывает всё ===== */
+.lk-grid{
+  display: flex !important;
+  align-items: stretch !important;
+  min-height: 100vh !important;
+}
+
+.lk-aside{
+  position: relative !important;             /* никаких fixed */
+  flex: 0 0 340px !important;                /* твои 340px */
+  min-height: 100vh !important;
+  background: #0E3A63 url("./images/fon.jpg") center/cover no-repeat !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  color: #fff !important;
+  padding-top: 40px !important;
+  box-shadow: inset -1px 0 0 rgba(255,255,255,.15) !important;
+  z-index: 1 !important;
+}
+
+.lk-content{
+  flex: 1 !important;
+  background: #fff !important;
+  min-height: 100vh !important;
+  padding: 40px 70px !important;
+  box-shadow: -6px 0 30px rgba(0,0,0,.08) !important;
+  position: relative !important;
+  z-index: 0 !important;
+  margin-left: 0 !important;                 /* гасим старые костыли */
+}
+
+/* На всякий случай глушим любые старые оверлеи */
+.lk-grid::before,
+.lk-aside::before,
+.lk-wrap::before{
+  content: none !important;
+  background: none !important;
+}
+
+
+.lk-notice {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.lk-notice.info {
+  background: #eef6ff;
+  color: #0066cc;
+}
+
+.lk-notice.success {
+  background: #e7f9ed;
+  color: #0b8a2f;
+}
+
+.lk-notice.error {
+  background: #ffeaea;
+  color: #d20000;
+}
+
+
+
+
+/* === Модальное окно === */
+.lk-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 15, 25, 0.6);
+  z-index: 9999;
+}
+
+.lk-modal__content {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+.lk-modal__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d2a44;
+  margin-bottom: 4px;
+}
+
+/* === Поле ввода === */
+.lk-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 10px 12px;
+  border: 1px solid #ccd4e0;
+  border-radius: 8px;
+  resize: vertical;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.lk-textarea:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.lk-modal__content {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.15);
+  padding: 26px 28px 24px 24px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+/* --- Верх модалки (аватар + текст) --- */
+.lk-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 8px; /* правый отступ */
+}
+
+.lk-modal__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f3f6fa;
+  border: 2px solid #e1e8f0;
+}
+
+.lk-modal__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d2a44;
+  margin: 0;
+}
+
+.lk-modal__subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* --- Поле ввода --- */
+.lk-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 10px 12px;
+  border: 1px solid #ccd4e0;
+  border-radius: 8px;
+  resize: vertical;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.lk-textarea:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* --- Кнопки --- */
+.lk-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 6px;
+  padding-right: 6px; /* правый отступ для симметрии */
+}
+
+/* --- Уведомления --- */
+.lk-notice {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.lk-notice.info {
+  background: #eef6ff;
+  color: #0066cc;
+}
+
+.lk-notice.success {
+  background: #e7f9ed;
+  color: #0b8a2f;
+}
+
+.lk-notice.error {
+  background: #ffeaea;
+  color: #d20000;
+}
+
+
+
+.lk-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.lk-modal__icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+/* --- Анимация появления --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
